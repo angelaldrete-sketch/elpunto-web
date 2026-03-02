@@ -1,80 +1,354 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Punto Café & Cocina</title>
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f8f8f8;
-  text-align: center;
-}
-.hero {
-  padding: 60px 20px;
-  background: #ffffff;
-}
-h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-p {
-  color: #555;
-}
-.btn {
-  display: block;
-  margin: 12px auto;
-  padding: 14px;
-  width: 85%;
-  max-width: 320px;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-}
-.primary {
-  background: black;
-  color: white;
-}
-.secondary {
-  background: #e5e5e5;
-  color: black;
-}
-.section {
-  padding: 40px 20px;
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>El Punto Café & Cocina | Tepic</title>
+  <meta name="description" content="Menú, reservas por WhatsApp, eventos y reseñas. El Punto Café & Cocina, Tepic." />
+
+  <!-- Tipografías del manual -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Manual */
+      --cobre:#98623C;
+      --azul:#304251;
+      --gris:#514946;
+
+      /* UI */
+      --bg:#fbfaf9;
+      --card:#ffffff;
+      --border:#e8e3df;
+      --shadow: 0 18px 60px rgba(0,0,0,.08);
+      --radius:18px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Arvo", serif;
+      color: var(--gris);
+      background:
+        radial-gradient(1000px 600px at 18% -10%, rgba(152,98,60,.10), transparent 55%),
+        radial-gradient(900px 520px at 92% 0%, rgba(48,66,81,.10), transparent 60%),
+        var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+
+    /* Top */
+    .top{
+      position:sticky; top:0; z-index:10;
+      background: rgba(251,250,249,.82);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .top .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width: 200px;}
+    .brand img{width:44px; height:44px; object-fit:contain}
+    .brand .title{
+      font-family:"Bebas Neue", sans-serif;
+      letter-spacing:1px;
+      font-size:26px;
+      line-height:1;
+    }
+    .brand .sub{
+      font-size:12px;
+      opacity:.8;
+      margin-top:2px;
+    }
+    .nav{
+      display:flex; flex-wrap:wrap; gap:8px;
+      font-size:12px;
+      opacity:.9;
+      justify-content:flex-end;
+    }
+    .nav a{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+    .nav a:hover{border-color:var(--border); background:#fff}
+
+    /* Cards */
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* Hero */
+    .hero{margin-top:16px; overflow:hidden}
+    .hero .inner{
+      padding:22px 18px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media(max-width:900px){ .hero .inner{grid-template-columns:1fr} }
+
+    h1{
+      margin:0 0 8px;
+      font-family:"Bebas Neue", sans-serif;
+      font-size: clamp(34px, 5vw, 58px);
+      letter-spacing:.8px;
+      line-height:1;
+    }
+    .lead{
+      margin:0 0 14px;
+      font-size:15px;
+      opacity:.86;
+      max-width: 56ch;
+    }
+    .divider{
+      height:1px; background:var(--border); margin:14px 0;
+    }
+
+    .cta{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    @media(max-width:520px){ .cta{grid-template-columns:1fr} }
+
+    .btn{
+      display:flex; align-items:center; justify-content:center;
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      font-weight:700;
+      background:#fff;
+      transition: transform .12s ease;
+      text-align:center;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn.primary{
+      background: var(--azul);
+      border-color: var(--azul);
+      color:#fff;
+    }
+    .btn.accent{
+      background: rgba(152,98,60,.10);
+      border-color: rgba(152,98,60,.26);
+    }
+
+    .side{
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(48,66,81,.06), rgba(152,98,60,.06));
+    }
+    .side h3{
+      margin:0 0 6px;
+      font-family:"Bebas Neue", sans-serif;
+      font-size:22px;
+      letter-spacing:.9px;
+    }
+    .side p{margin:0; font-size:14px; opacity:.88; line-height:1.5}
+    .minirow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    /* Sections */
+    section{margin-top:16px; padding:18px}
+    section h2{
+      margin:0 0 8px;
+      font-family:"Bebas Neue", sans-serif;
+      letter-spacing:.9px;
+      font-size:28px;
+    }
+    .muted{margin:0 0 12px; font-size:14px; opacity:.82}
+
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    @media(max-width:900px){ .grid3{grid-template-columns:1fr} }
+    .tile{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+      background:#fff;
+    }
+    .tile b{display:block; margin-bottom:6px}
+    .tile p{margin:0; font-size:14px; opacity:.82}
+
+    footer{
+      margin:16px 0 70px;
+      text-align:center;
+      font-size:12px;
+      opacity:.75;
+    }
+
+    /* WhatsApp flotante */
+    .wa-float{
+      position:fixed; right:16px; bottom:16px; z-index:50;
+      display:flex; align-items:center; gap:10px;
+      padding:12px 14px;
+      border-radius:999px;
+      background:#25D366;
+      color:#fff;
+      font-weight:800;
+      box-shadow: 0 18px 40px rgba(0,0,0,.18);
+    }
+  </style>
 </head>
+
 <body>
+  <div class="top">
+    <div class="inner">
+      <div class="brand">
+        <!-- Si no subes logo.png, esta imagen no se verá -->
+        <img src="logo.png" alt="El Punto Café & Cocina">
+        <div>
+          <div class="title">EL PUNTO</div>
+          <div class="sub">CAFÉ &amp; COCINA</div>
+        </div>
+      </div>
 
-<div class="hero">
-  <h1>Donde cada mesa se convierte en experiencia ☕️</h1>
-  <p>Brunch, cocina y eventos en Ciudad del Valle.</p>
+      <nav class="nav">
+        <a href="#menu">Menú</a>
+        <a href="#reservas">Reservas</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#resenas">Reseñas</a>
+        <a href="#ubicacion">Ubicación</a>
+      </nav>
+    </div>
+  </div>
 
-  <a class="btn primary" href="PON_AQUI_LINK_DE_TU_MENU" target="_blank">Ver Menú</a>
+  <main class="wrap">
+    <div class="card hero">
+      <div class="inner">
+        <div>
+          <h1>Brunch, cocina y eventos<br>con estilo</h1>
+          <p class="lead">
+            Consulta el menú, reserva por WhatsApp y si ya nos visitaste, déjanos tu reseña en Google.
+          </p>
 
-  <a class="btn secondary" href="https://wa.me/523111601111?text=Hola%2C%20quiero%20reservar%20una%20mesa%20en%20El%20Punto" target="_blank">
-  Reservar Mesa
-  </a>
+          <div class="divider"></div>
 
-  <a class="btn secondary" href="https://wa.me/523111601111?text=Hola%2C%20quiero%20información%20sobre%20eventos%20en%20El%20Punto" target="_blank">
-  Eventos Privados
-  </a>
+          <div class="cta">
+            <a class="btn primary" id="btnMenuHero" target="_blank" rel="noopener">Ver menú</a>
+            <a class="btn accent" id="btnReserva" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+            <a class="btn" id="btnEventos" target="_blank" rel="noopener">Cotizar evento</a>
+            <a class="btn" id="btnResena" target="_blank" rel="noopener">Dejar reseña ⭐</a>
+          </div>
+        </div>
 
-  <a class="btn secondary" href="PON_AQUI_LINK_DE_GOOGLE_MAPS" target="_blank">
-  Dejar Reseña ⭐
-  </a>
-</div>
+        <aside class="side">
+          <h3>El Punto · Tepic</h3>
+          <p><b>Av. Universidad #137 esquina Portugal</b><br>Ciudad del Valle</p>
+          <div style="height:10px"></div>
+          <p><b>Horario</b><br>8:00 am – 10:00 pm</p>
 
-<div class="section">
-  <h2>Ubicación</h2>
-  <p>Av. Universidad #137 esquina Portugal<br>
-  Ciudad del Valle, Tepic</p>
+          <div class="minirow">
+            <a class="btn" id="btnMaps" target="_blank" rel="noopener">Cómo llegar</a>
+            <a class="btn" id="btnVerResenas" target="_blank" rel="noopener">Ver reseñas</a>
+          </div>
+        </aside>
+      </div>
+    </div>
 
-  <a class="btn secondary" href="PON_AQUI_LINK_DE_GOOGLE_MAPS" target="_blank">
-  Cómo Llegar
-  </a>
-</div>
+    <section id="menu" class="card">
+      <h2>Menú</h2>
+      <p class="muted">Nuestro menú está en el catálogo de WhatsApp (siempre actualizado).</p>
+      <div class="minirow">
+        <a class="btn primary" id="btnMenu" target="_blank" rel="noopener">Abrir menú</a>
+        <a class="btn accent" id="btnMenuWA" target="_blank" rel="noopener">Pedir recomendación</a>
+      </div>
+    </section>
 
+    <section id="reservas" class="card">
+      <h2>Reservas</h2>
+      <p class="muted">Te confirmamos por WhatsApp. Ideal para brunch, familias y reuniones.</p>
+      <div class="grid3">
+        <div class="tile"><b>Brunch & Café</b><p>Perfecto para empezar el día.</p></div>
+        <div class="tile"><b>Familias & Amigos</b><p>Ambiente cómodo y atención cuidada.</p></div>
+        <div class="tile"><b>Reuniones</b><p>Opciones para grupos y servicio personalizado.</p></div>
+      </div>
+      <div class="minirow" style="margin-top:12px">
+        <a class="btn primary" id="btnReserva2" target="_blank" rel="noopener">Reservar ahora</a>
+      </div>
+    </section>
+
+    <section id="eventos" class="card">
+      <h2>Eventos</h2>
+      <p class="muted">Cumpleaños, reuniones privadas y corporativos. Cotiza por WhatsApp.</p>
+      <div class="grid3">
+        <div class="tile"><b>Cumpleaños</b><p>Opciones por persona o consumo sugerido.</p></div>
+        <div class="tile"><b>Corporativos</b><p>Desayunos, coffee breaks y juntas.</p></div>
+        <div class="tile"><b>Celebraciones</b><p>Experiencia cuidada de principio a fin.</p></div>
+      </div>
+      <div class="minirow" style="margin-top:12px">
+        <a class="btn accent" id="btnEventos2" target="_blank" rel="noopener">Cotizar evento</a>
+      </div>
+    </section>
+
+    <section id="resenas" class="card">
+      <h2>Google Reviews</h2>
+      <p class="muted">Tu reseña nos ayuda muchísimo a seguir creciendo.</p>
+      <div class="minirow">
+        <a class="btn primary" id="btnResena2" target="_blank" rel="noopener">Dejar reseña ⭐</a>
+        <a class="btn" id="btnVerResenas2" target="_blank" rel="noopener">Ver reseñas</a>
+      </div>
+    </section>
+
+    <section id="ubicacion" class="card">
+      <h2>Ubicación</h2>
+      <p class="muted">Av. Universidad #137 esquina Portugal · Ciudad del Valle · Tepic</p>
+      <div class="minirow">
+        <a class="btn primary" id="btnMaps2" target="_blank" rel="noopener">Cómo llegar</a>
+        <a class="btn" href="tel:+523111601111">Llamar</a>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y"></span> El Punto Café & Cocina
+    </footer>
+  </main>
+
+  <a class="wa-float" id="waFloat" target="_blank" rel="noopener">WhatsApp · Reservas</a>
+
+  <script>
+    const WHATS = "523111601111";
+    const LINK_GOOGLE = "https://share.google/X2lqOZHSLSdcqLIXm";
+    const LINK_RESENA = "https://g.page/r/CTVHX2_PVyXyEAE/review";
+    const LINK_MENU = "https://wa.me/c/5213111601111";
+
+    const wa = (txt) => `https://wa.me/${WHATS}?text=${encodeURIComponent(txt)}`;
+
+    // Menú
+    document.getElementById("btnMenuHero").href = LINK_MENU;
+    document.getElementById("btnMenu").href = LINK_MENU;
+
+    // WhatsApp (chat)
+    document.getElementById("btnReserva").href  = wa("Hola, quiero reservar una mesa en El Punto. ¿Me apoyas por favor?");
+    document.getElementById("btnReserva2").href = wa("Hola, quiero reservar una mesa en El Punto. ¿Me apoyas por favor?");
+    document.getElementById("btnEventos").href  = wa("Hola, quiero información y cotización para un evento en El Punto.");
+    document.getElementById("btnEventos2").href = wa("Hola, quiero información y cotización para un evento en El Punto.");
+    document.getElementById("btnMenuWA").href   = wa("Hola, ¿me recomiendas algo del menú? 😊");
+    document.getElementById("waFloat").href     = wa("Hola, quiero reservar / información 😊");
+
+    // Google
+    document.getElementById("btnMaps").href = LINK_GOOGLE;
+    document.getElementById("btnMaps2").href = LINK_GOOGLE;
+    document.getElementById("btnVerResenas").href = LINK_GOOGLE;
+    document.getElementById("btnVerResenas2").href = LINK_GOOGLE;
+
+    // Reseña directa
+    document.getElementById("btnResena").href = LINK_RESENA;
+    document.getElementById("btnResena2").href = LINK_RESENA;
+
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
